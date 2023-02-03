@@ -1,0 +1,17 @@
+{
+    // IntelliSenseë¥? ?‚¬?š©?•˜?—¬ ê°??Š¥?•œ ?Š¹?„±?— ????•´ ?•Œ?•„ë³´ì„¸?š”.
+    // ê¸°ì¡´ ?Š¹?„±?— ????•œ ?„¤ëª…ì„ ë³´ë ¤ë©? ê°?ë¦¬í‚µ?‹ˆ?‹¤.
+    // ??„¸?•œ ?‚´?š©?„ ë³´ë ¤ë©? https://go.microsoft.com/fwlink/?linkid=830387?„(ë¥?) ë°©ë¬¸?•˜?„¸?š”.
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Å×½ºÆ®",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\64061.js"
+        }
+    ]
+}
