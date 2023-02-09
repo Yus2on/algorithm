@@ -34,14 +34,15 @@ function solution(numbers, hand) {
             let rightFinger = keypad['#'];
 
             // 절대값으로 눌러야할 위치 - 현재손 위치
+            // keypad[5][0] = 1            keypad[5][1] = 2         // 눌러야 할 위치
+            // keypad[4][0] = 0            keypad[4][1] = 2         // 마지막 손가락 위치 
+            // (1 - 0)  + (2 - 2) = 1
 
-            console.log('num: ' + num);
-            console.log('left: ' + left);
-            console.log('right: ' + right);
+            leftFinger =  Math.abs(keypad[num][0] - keypad[left][0]) + Math.abs(keypad[num][1] - keypad[left][1]);
+            rightFinger =  Math.abs(keypad[num][0] - keypad[right][0]) + Math.abs(keypad[num][1] - keypad[right][1]);
 
             
-            /*
-            // 왼손 오른손 중 가까운 위치, hand if
+            // 왼손 오른손 중 가까운 위치, hand 비교 
             if (leftFinger > rightFinger) {
                 answer += 'R';
                 right = num;
@@ -57,12 +58,13 @@ function solution(numbers, hand) {
                     left = num;
                 }
             }
-            */
 
 
         }
 
     } // end for
+
+    console.log(answer);
 
     return answer;
 }
