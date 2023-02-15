@@ -28,10 +28,14 @@ function solution(dartResult) {
             sum.push(Math.pow(total, 3));
         }
         else if (dartResult[i] == '*'){ // (직전 점수 + 해당 점수) * 2
-            
+            /* 
+            NaN 출력
+                sum[sum.length - 1] = sum[sum.length - 1] * 2;
+                sum[sum.length - 2] = sum[sum.length - 2] * 2;
+            */
         }
         else if (dartResult[i] == '#'){ // 해당 점수 마이너스
-           
+            sum[sum.length - 1] = -1 * sum[sum.length - 1];
         } 
     }
 
@@ -53,7 +57,10 @@ function solution(dartResult) {
 3. dartResult[i]가 숫자일 경우 (1~9) 변수에 넣어줌
 4. 그 외 문자열은 위에처럼 제곱이나 마이너스 처리
 5. 보너스, 옵션 적용된 점수를 합쳐서 반환 
-
+--
+1. 10을 체크해야 하는데 ['1', '0'] 으로 넘어오기 때문에 if문 체크 필요 -----> 정수 10까지만 존재하니까 현재가 0이면서 바로 앞자리가 1일 때 10으로 변경 (삼항연산자?)
+2. S 일 때는 1제곱이라 pow 안 씀 
+3. 스타상(*) 때 계속 NaN 출력 : 
 
 
 
