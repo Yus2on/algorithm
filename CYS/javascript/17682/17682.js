@@ -9,14 +9,8 @@ function solution(dartResult) {
 
     for(let i = 0; i < dartResult.length; i++) {
         if (dartResult[i] >= 0 && dartResult[i] <= 9 ) { //숫자
-            if( dartResult[i] == '1' && dartResult[i + 1] == '0' ) {
-                // i번째가 1 뒷자리가 0 >> 10점 처리
-                total = 10;
-                i ++;
-                continue;
-            } else {
-                total = dartResult[i];
-            }
+            // i-1 이 1인지 확인 
+            total = Number(dartResult[i - 1]) == 1 ? 10 : Number(dartResult[i]);
         }
         else if (dartResult[i] == 'S'){ 
             sum.push(total);
@@ -28,11 +22,12 @@ function solution(dartResult) {
             sum.push(Math.pow(total, 3));
         }
         else if (dartResult[i] == '*'){ // (직전 점수 + 해당 점수) * 2
-            /* 
-            NaN 출력
+            if (sum.length > 1) {
                 sum[sum.length - 1] = sum[sum.length - 1] * 2;
                 sum[sum.length - 2] = sum[sum.length - 2] * 2;
-            */
+            } else {
+                sum[sum.length - 1] = sum[sum.length - 1] * 2;
+            }
         }
         else if (dartResult[i] == '#'){ // 해당 점수 마이너스
             sum[sum.length - 1] = -1 * sum[sum.length - 1];
@@ -58,9 +53,9 @@ function solution(dartResult) {
 4. 그 외 문자열은 위에처럼 제곱이나 마이너스 처리
 5. 보너스, 옵션 적용된 점수를 합쳐서 반환 
 --
-1. 10을 체크해야 하는데 ['1', '0'] 으로 넘어오기 때문에 if문 체크 필요 -----> 정수 10까지만 존재하니까 현재가 0이면서 바로 앞자리가 1일 때 10으로 변경 (삼항연산자?)
+1. 10을 체크해야 하는데 ['1', '0'] 으로 넘어오기 때문에 if문 체크 필요 -----> 정수 10까지만 존재하니까 현재가 0이면서 바로 앞자리가 1일 때 10으로 변경 (삼항연산자)
 2. S 일 때는 1제곱이라 pow 안 씀 
-3. 스타상(*) 때 계속 NaN 출력 : 
+3. 스타상(*) 때 계속 NaN 출력 -----> 앞의 값도 같이 두 배를 해줘야 해서 sum.length를 체크해서 1보다 클 때 현재가 몇 번째 기회인지 체크
 
 
 
