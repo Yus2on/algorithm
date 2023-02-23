@@ -33,18 +33,19 @@ function solution(N, stages) {
         answer.push(arr);
     }
 
+    answer.sort(function(a, b) {
+        // 실패율 기준 내림차순
+        return b.fail - a.fail;
+    });
 
-    // 실패율 기준 내림차순
-    
+    console.log(answer);
 
-
+    for (const key in answer) {
+        // arr.stage 만 반환
+        answer[key] = answer[key].stage;
+    }
     
-
- 
-    // arr.stage 만 반환
-    
-    
- 
+    console.log(answer);
     return answer;
 }
 
