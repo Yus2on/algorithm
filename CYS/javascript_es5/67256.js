@@ -1,8 +1,6 @@
-solution([1, 3, 4, 5, 8, 2, 1, 4, 5, 9, 5], 'right');
+solution([1, 3, 4, 5, 8, 2, 1, 4, 5, 9, 5], 'right'); // 
 
 function solution(numbers, hand) {
-    var answer = '';
-
     const keypad = {
         1:[0,3], 2:[1,3], 3:[2,3],
         4:[0,2], 5:[1,2], 6:[2,2],
@@ -13,58 +11,43 @@ function solution(numbers, hand) {
     let left = '*';
     let right = '#';
 
+    const lefts = [1, 4, 7];
+    const rights = [3, 6, 9];
 
-
-    for (let i = 0; i < numbers.length; i++) {
-        let num = numbers[i];
-        if (num % 3 == 1) {
-            // 147
-            answer += 'L';
-            left = num;
-        } else if (num != 0 && num % 3 == 0) {
-            // 369
-            answer += 'R';
-            right = num;
-
+    var answer = numbers.reduce((result, number, index)=>{  
+        if(lefts.includes(number)) { // 1,4,7 L
+            result.push("L");
+            left = number;
+        } else if(rights.includes(number)){ // 3,6,9 R
+            result.push("R");
+            right = number;
         } else {
-            // 0258
-
-            // 시작지점
             let leftFinger = keypad['*'];
             let rightFinger = keypad['#'];
 
-            // 절대값으로 눌러야할 위치 - 현재손 위치
-            // keypad[5][0] = 1            keypad[5][1] = 2         // 눌러야 할 위치
-            // keypad[4][0] = 0            keypad[4][1] = 2         // 마지막 손가락 위치 
-            // (1 - 0)  + (2 - 2) = 1
+            leftFinger =  Math.abs(keypad[number][0] - keypad[left][0]) + Math.abs(keypad[number][1] - keypad[left][1]);
+            rightFinger =  Math.abs(keypad[number][0] - keypad[right][0]) + Math.abs(keypad[number][1] - keypad[right][1]);
 
-            leftFinger =  Math.abs(keypad[num][0] - keypad[left][0]) + Math.abs(keypad[num][1] - keypad[left][1]);
-            rightFinger =  Math.abs(keypad[num][0] - keypad[right][0]) + Math.abs(keypad[num][1] - keypad[right][1]);
-
-            
-            // 왼손 오른손 중 가까운 위치, hand 비교 
             if (leftFinger > rightFinger) {
-                answer += 'R';
-                right = num;
+                result.push("R");
+                right = number;
             } else if (leftFinger < rightFinger) {
-                answer += 'L';
-                left = num;
+                result.push("L");
+                left = number;
             } else if (leftFinger == rightFinger) {
                 if (hand == 'right') {
-                    answer += 'R';
-                    right = num;
+                    result.push("R");
+                    right = number;
                 } else {
-                    answer += 'L';
-                    left = num;
+                    result.push("L");
+                    left = number;
                 }
             }
-
-
         }
+        return result;
+    } ,[]);
 
-    } // end for
-
-    console.log(answer);
+    answer = answer.join(""); //LRLLLRLLRRL 
 
     return answer;
 }
