@@ -5,11 +5,13 @@ function solution(board, moves) {
     var answer = 0;
     let arr = [];
 
-    moves.forEach(i => {
-        const move = i - 1; 
+    moves.forEach(move => {
+        //const move = i - 1; 
 
-        for (j of board) {
-            const doll = j[move];
+        //for(let i = 0; i < board.length; i++) {
+            for (const j of board) {
+            //const doll = board[i][move - 1];
+            const doll = j[move - 1];
 
             if (doll != 0) {
                 if (arr.length != 0  && arr[arr.length - 1] == doll) {
@@ -17,8 +19,9 @@ function solution(board, moves) {
                     answer += 2;
                 } else {
                     arr.push(doll);
-                    j[move] = 0;
                 }
+                //board[i][move - 1] = 0;
+                j[move - 1] = 0;
                 break;
             }
         }
